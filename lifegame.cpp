@@ -212,6 +212,7 @@ void nextStep(void)     //根据规则计算下一时刻细胞矩阵
             }
         }
     }
+	swapMap();
 }
 
 
@@ -228,7 +229,13 @@ int getCellAlive(int x, int y)     //获取细胞存活状态
     return cell->Alive;
 }
 
-
+void swapMap(void)//交换地图
+{
+        SCell* temp=current_map;
+	current_map=new_map;
+	new_map=temp;
+	
+}	
 
 
 
