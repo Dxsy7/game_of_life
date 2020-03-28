@@ -1,3 +1,4 @@
+
 #include "stdio.h"
 #include "time.h"
 #include "iostream"
@@ -6,7 +7,7 @@ using namespace std;
 #define WIDTH 20
 #define HEIGHT 20
 
-typedef struct _SCell              //Ï¸°ûÉú´æ×´Ì¬
+typedef struct _SCell              //Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 {
     int Alive;
 } 
@@ -15,21 +16,23 @@ SCell;
 SCell* current_map = (SCell *) new SCell[WIDTH * HEIGHT];
 SCell* new_map = (SCell *) new SCell[WIDTH * HEIGHT];
 
-//ÉùÃ÷
-void setCurCell(int x, int y, int Alive);//ÉèÖÃµ±Ç°¾ØÕó£¨x,y£©µÄÏ¸°û´æ»î×´Ì¬
-void setNewCell(int x, int y, int Alive);//ÉèÖÃÏÂÒ»Ê±¿Ì£¨x,y£©µÄÏ¸°û´æ»î×´Ì¬
-int getAroundCellNum(int x, int y); //¼ÆËã£¨x,y£©ÖÜÎ§´æ»îµÄÏ¸°ûÊıÁ¿
-int locValid(int x, int y);   //±ß½çÅĞ¶¨, 1-ÓĞĞ§ 0-ÎŞĞ§
-void swapMap(void);     //½»»»µØÍ¼
-SCell* getCell(SCell* buf, int x, int y);  //´ÓµØÍ¼ÖĞ»ñÈ¡Ä³×ø±êµÄÏ¸°ûÖ¸Õë
-void InitMap();  //³õÊ¼»¯µØÍ¼
-void killAll(void);     //ÇåÆÁ£¬É±ËÀËùÓĞÏ¸°û
-void nextStep(void);    //¼ÆËãÏÂÒ»Ê±¿ÌÏ¸°û¾ØÕó
-int getCellAlive(int x, int y); //»ñÈ¡Ï¸°û´æ»î×´Ì¬ , ·µ»ØÖµ:1-´æ»î, 0-ËÀÍö -1-³ö´í
+//ï¿½ï¿½ï¿½ï¿½
+void setCurCell(int x, int y, int Alive);//ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½x,yï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½×´Ì¬
+void setNewCell(int x, int y, int Alive);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½Ì£ï¿½x,yï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½×´Ì¬
+int getAroundCellNum(int x, int y); //ï¿½ï¿½ï¿½ã£¨x,yï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
+int locValid(int x, int y);   //ï¿½ß½ï¿½ï¿½Ğ¶ï¿½, 1-ï¿½ï¿½Ğ§ 0-ï¿½ï¿½Ğ§
+void swapMap(void);     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
+SCell* getCell(SCell* buf, int x, int y);  //ï¿½Óµï¿½Í¼ï¿½Ğ»ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ö¸ï¿½ï¿½
+void InitMap();  //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼
+void killAll(void);     //ï¿½ï¿½ï¿½ï¿½ï¿½É±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½
+void nextStep(void);    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
+int getCellAlive(int x, int y); //ï¿½ï¿½È¡Ï¸ï¿½ï¿½ï¿½ï¿½×´Ì¬ , ï¿½ï¿½ï¿½ï¿½Öµ:1-ï¿½ï¿½ï¿½, 0-ï¿½ï¿½ï¿½ï¿½ -1-ï¿½ï¿½ï¿½
 
 
 
-void killAll(void)                //ÇåÆÁ
+
+void killAll(void)                //æ¸…å±
+
 {
     if (current_map != NULL && new_map != NULL)
     {
@@ -45,24 +48,32 @@ void killAll(void)                //ÇåÆÁ
 
 }
 
-void InitMap()        //³õÊ¼»¯Ï¸°û¾ØÕó
+
+
+
+void InitMap()        //åˆå§‹åŒ–ç»†èƒçŸ©é˜µ
+
 {
     killAll();
 
-    srand((unsigned)time(NULL)); //ÓÃÊ±¼ä×öÖÖ£¬Ã¿´Î²úÉúËæ»úÊı²»Ò»Ñù
+    srand((unsigned)time(NULL)); //ç”¨æ—¶é—´åšç§ï¼Œæ¯æ¬¡äº§ç”Ÿéšæœºæ•°ä¸ä¸€æ ·
 
     for (int i = 0; i < WIDTH; ++i)
     {
         for (int j = 0; j < HEIGHT; ++j)
         {
-            int Alive = rand() % 2;  //²úÉú0»ò1µÄËæ»úÊı
+            int Alive = rand() % 2;  //äº§ç”Ÿ0æˆ–1çš„éšæœºæ•°
             setCurCell(i, j, Alive);
         }
 
     }
 }
 
-void setCurCell(int x, int y, int Alive)  //ÉèÖÃµ±Ç°Ï¸°û¾ØÕóÏ¸°û´æ»î×´Ì¬
+
+
+
+void setCurCell(int x, int y, int Alive)  //è®¾ç½®å½“å‰ç»†èƒçŸ©é˜µç»†èƒå­˜æ´»çŠ¶æ€
+
 {
     if (locValid(x, y) == 0)
     {
@@ -79,7 +90,7 @@ void setCurCell(int x, int y, int Alive)  //ÉèÖÃµ±Ç°Ï¸°û¾ØÕóÏ¸°û´æ»î×´Ì¬
     }
 }
 
-void setNewCell(int x, int y, int Alive)  //ÉèÖÃÏÂÒ»Ê±¿ÌÏ¸°û¾ØÕó´æ»î×´Ì¬
+void setNewCell(int x, int y, int Alive)  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 {
     if (locValid(x, y) == 0)
     {
@@ -96,15 +107,15 @@ void setNewCell(int x, int y, int Alive)  //ÉèÖÃÏÂÒ»Ê±¿ÌÏ¸°û¾ØÕó´æ»î×´Ì¬
     }
 }
 
-int getAroundCellNum(int x, int y)   //¼ÆËãÖÜÎ§´æ»îÏ¸°ûÊıÁ¿
+int getAroundCellNum(int x, int y)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
 {
     int count = 0;
 
-    if (locValid(x, y) == 0)  //±ß½çÅĞ¶Ï
+    if (locValid(x, y) == 0)  //ï¿½ß½ï¿½ï¿½Ğ¶ï¿½
     {   
         return -1;
     }
-    //²âÊÔÄ¿±êÎ»ÖÃÖÜÎ§µÄ°Ë¸öÏàÁÚÎ»ÖÃ
+    //ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Î§ï¿½Ä°Ë¸ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     for (int i = x - 1; i <= x + 1; ++i)
     {
         for (int j = y - 1; j <= y + 1; ++j)
@@ -126,7 +137,10 @@ int getAroundCellNum(int x, int y)   //¼ÆËãÖÜÎ§´æ»îÏ¸°ûÊıÁ¿
     return count;
 }
 
-int locValid(int x, int y) //±ß½çÅĞ¶Ï
+
+
+int locValid(int x, int y)     //è¾¹ç•Œåˆ¤æ–­
+
 {
     if (x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
     {
@@ -138,13 +152,45 @@ int locValid(int x, int y) //±ß½çÅĞ¶Ï
 
 
 
+
 /*
-Ã¿¸öÏ¸°ûµÄÉúËÀ×ñÑ­ÏÂÃæµÄÔ­Ôò£º
-1£® Èç¹ûÒ»¸öÏ¸°ûÖÜÎ§ÓĞ3¸öÏ¸°ûÎªÉú£¨Ò»¸öÏ¸°ûÖÜÎ§¹²ÓĞ8¸öÏ¸°û£©£¬Ôò¸ÃÏ¸°ûÎªÉú£¨¼´¸ÃÏ¸°ûÈôÔ­ÏÈÎªËÀ£¬Ôò×ªÎªÉú£¬ÈôÔ­ÏÈÎªÉú£¬Ôò±£³Ö²»±ä£© ¡£
-2£® Èç¹ûÒ»¸öÏ¸°ûÖÜÎ§ÓĞ2¸öÏ¸°ûÎªÉú£¬Ôò¸ÃÏ¸°ûµÄÉúËÀ×´Ì¬±£³Ö²»±ä£»
-3£® ÔÚÆäËüÇé¿öÏÂ£¬¸ÃÏ¸°ûÎªËÀ
+Ã¿ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½
+1ï¿½ï¿½ ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½3ï¿½ï¿½Ï¸ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½8ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½×ªÎªï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½Îªï¿½ï¿½ï¿½ò±£³Ö²ï¿½ï¿½ä£© ï¿½ï¿½
+2ï¿½ï¿½ ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½2ï¿½ï¿½Ï¸ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ä£»
+3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Îªï¿½ï¿½
 */
-void nextStep(void)     //¸ù¾İ¹æÔò¼ÆËãÏÂÒ»Ê±¿ÌÏ¸°û¾ØÕó
+
+int getAroundCellNum(int x, int y)   //è®¡ç®—å‘¨å›´å­˜æ´»ç»†èƒæ•°é‡
+{
+    int count = 0;
+    if (locValid(x, y) == 0)  //è¾¹ç•Œåˆ¤æ–­
+    {   
+        return -1;
+    }
+    //æµ‹è¯•ç›®æ ‡ä½ç½®å‘¨å›´çš„å…«ä¸ªç›¸é‚»ä½ç½®
+    for (int i = x - 1; i <= x + 1; ++i)
+    {
+        for (int j = y - 1; j <= y + 1; ++j)
+        {
+            if (i == x && j == y)
+            {
+                continue;
+            }
+            if (locValid(i, j) == 1)
+            {
+                if (getCellAlive(i, j) == 1)
+                {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}
+
+
+void nextStep(void)     //æ ¹æ®è§„åˆ™è®¡ç®—ä¸‹ä¸€æ—¶åˆ»ç»†èƒçŸ©é˜µ
+
 {
     int aroundNum = 0;
     for (int i = 0; i < WIDTH; ++i)
@@ -168,7 +214,11 @@ void nextStep(void)     //¸ù¾İ¹æÔò¼ÆËãÏÂÒ»Ê±¿ÌÏ¸°û¾ØÕó
     }
 }
 
-int getCellAlive(int x, int y)     //»ñÈ¡Ï¸°û´æ»î×´Ì¬
+
+
+
+int getCellAlive(int x, int y)     //è·å–ç»†èƒå­˜æ´»çŠ¶æ€
+
 {
     if (locValid(x, y) == 0)
     {
@@ -179,12 +229,22 @@ int getCellAlive(int x, int y)     //»ñÈ¡Ï¸°û´æ»î×´Ì¬
 }
 
 
-SCell* getCell(SCell* buf, int x, int y) //´ÓµØÍ¼ÖĞ»ñÈ¡Ä³×ø±êµÄÏ¸°ûÖ¸Õë
+
+
+
+SCell* getCell(SCell* buf, int x, int y) //ä»åœ°å›¾ä¸­è·å–æŸåæ ‡çš„ç»†èƒæŒ‡é’ˆ
+
+
 { 
 	return buf + y * WIDTH + x; 
 }
 
-void print()  //Êä³öÏ¸°û¾ØÕó
+
+
+
+void print()  //è¾“å‡ºç»†èƒçŸ©é˜µ
+
+
 {
 	int k;
 	for(int i=0;i<WIDTH;i++)
@@ -200,13 +260,15 @@ void print()  //Êä³öÏ¸°û¾ØÕó
 	
 }
 
+
+
 int main()
 {
 	int a;
 	InitMap();
 	print();
 		nextStep();
-		printf("ÊÇ·ñ²é¿´ÏÂÒ»²½Ñİ»¯£¨1 or 0£©£º");
+		printf("ï¿½Ç·ï¿½é¿´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½İ»ï¿½ï¿½ï¿½1 or 0ï¿½ï¿½ï¿½ï¿½");
 		scanf("%d",&a);
 		switch (a){
 			case 1: print(); break;
@@ -214,3 +276,6 @@ int main()
 		}
 
 }
+
+
+  
