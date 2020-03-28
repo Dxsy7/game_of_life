@@ -1,4 +1,38 @@
+
+#include "stdio.h"
+#include "time.h"
+#include "iostream"
+using namespace std;
+
+#define WIDTH 20
+#define HEIGHT 20
+
+typedef struct _SCell              //ϸ�����״̬
+{
+    int Alive;
+} 
+SCell;
+
+SCell* current_map = (SCell *) new SCell[WIDTH * HEIGHT];
+SCell* new_map = (SCell *) new SCell[WIDTH * HEIGHT];
+
+//����
+void setCurCell(int x, int y, int Alive);//���õ�ǰ����x,y����ϸ����״̬
+void setNewCell(int x, int y, int Alive);//������һʱ�̣�x,y����ϸ����״̬
+int getAroundCellNum(int x, int y); //���㣨x,y����Χ����ϸ�����
+int locValid(int x, int y);   //�߽��ж�, 1-��Ч 0-��Ч
+void swapMap(void);     //������ͼ
+SCell* getCell(SCell* buf, int x, int y);  //�ӵ�ͼ�л�ȡĳ����ϸ��ָ��
+void InitMap();  //��ʼ����ͼ
+void killAll(void);     //�����ɱ������ϸ��
+void nextStep(void);    //������һʱ��ϸ�����
+int getCellAlive(int x, int y); //��ȡϸ����״̬ , ����ֵ:1-���, 0-���� -1-���
+
+
+
+
 void killAll(void)                //清屏
+
 {
     if (current_map != NULL && new_map != NULL)
     {
@@ -15,7 +49,10 @@ void killAll(void)                //清屏
 }
 
 
+
+
 void InitMap()        //初始化细胞矩阵
+
 {
     killAll();
 
@@ -33,7 +70,10 @@ void InitMap()        //初始化细胞矩阵
 }
 
 
+
+
 void setCurCell(int x, int y, int Alive)  //设置当前细胞矩阵细胞存活状态
+
 {
     if (locValid(x, y) == 0)
     {
@@ -50,8 +90,57 @@ void setCurCell(int x, int y, int Alive)  //设置当前细胞矩阵细胞存活
     }
 }
 
+void setNewCell(int x, int y, int Alive)  //������һʱ��ϸ�������״̬
+{
+    if (locValid(x, y) == 0)
+    {
+        return;
+    }
+    else
+    {
+        SCell* cell = getCell(new_map, x, y);
+        if (cell - new_map >= WIDTH * HEIGHT)
+        {
+            return;
+        }
+        cell->Alive = Alive;
+    }
+}
+
+int getAroundCellNum(int x, int y)   //������Χ���ϸ�����
+{
+    int count = 0;
+
+    if (locValid(x, y) == 0)  //�߽��ж�
+    {   
+        return -1;
+    }
+    //����Ŀ��λ����Χ�İ˸�����λ��
+    for (int i = x - 1; i <= x + 1; ++i)
+    {
+        for (int j = y - 1; j <= y + 1; ++j)
+        {
+            if (i == x && j == y)
+            {
+                continue;
+            }
+            if (locValid(i, j) == 1)
+            {
+                if (getCellAlive(i, j) == 1)
+                {
+                    count++;
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
+
 
 int locValid(int x, int y)     //边界判断
+
 {
     if (x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
     {
@@ -60,6 +149,16 @@ int locValid(int x, int y)     //边界判断
     return 1;
 }
 
+
+
+
+
+/*
+ÿ��ϸ���������ѭ�����ԭ��
+1�� ���һ��ϸ����Χ��3��ϸ��Ϊ��һ��ϸ����Χ����8��ϸ�����ϸ��Ϊ����ϸ����ԭ��Ϊ�����תΪ����ԭ��Ϊ���򱣳ֲ��䣩 ��
+2�� ���һ��ϸ����Χ��2��ϸ��Ϊ�����ϸ�������״̬���ֲ��䣻
+3�� ����������£���ϸ��Ϊ��
+*/
 
 int getAroundCellNum(int x, int y)   //计算周围存活细胞数量
 {
@@ -91,6 +190,7 @@ int getAroundCellNum(int x, int y)   //计算周围存活细胞数量
 
 
 void nextStep(void)     //根据规则计算下一时刻细胞矩阵
+
 {
     int aroundNum = 0;
     for (int i = 0; i < WIDTH; ++i)
@@ -115,7 +215,10 @@ void nextStep(void)     //根据规则计算下一时刻细胞矩阵
 }
 
 
+
+
 int getCellAlive(int x, int y)     //获取细胞存活状态
+
 {
     if (locValid(x, y) == 0)
     {
@@ -126,13 +229,22 @@ int getCellAlive(int x, int y)     //获取细胞存活状态
 }
 
 
+
+
+
 SCell* getCell(SCell* buf, int x, int y) //从地图中获取某坐标的细胞指针
+
+
 { 
 	return buf + y * WIDTH + x; 
 }
 
 
+
+
 void print()  //输出细胞矩阵
+
+
 {
 	int k;
 	for(int i=0;i<WIDTH;i++)
@@ -147,3 +259,23 @@ void print()  //输出细胞矩阵
 	}
 	
 }
+
+
+
+int main()
+{
+	int a;
+	InitMap();
+	print();
+		nextStep();
+		printf("�Ƿ�鿴��һ���ݻ���1 or 0����");
+		scanf("%d",&a);
+		switch (a){
+			case 1: print(); break;
+			default:{return 0;break;}
+		}
+
+}
+
+
+  
