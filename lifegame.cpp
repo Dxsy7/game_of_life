@@ -13,6 +13,8 @@ void killAll(void)                //清屏
     }
 
 }
+
+
 void InitMap()        //初始化细胞矩阵
 {
     killAll();
@@ -29,6 +31,8 @@ void InitMap()        //初始化细胞矩阵
 
     }
 }
+
+
 void setCurCell(int x, int y, int Alive)  //设置当前细胞矩阵细胞存活状态
 {
     if (locValid(x, y) == 0)
@@ -45,6 +49,8 @@ void setCurCell(int x, int y, int Alive)  //设置当前细胞矩阵细胞存活
         cell->Alive = Alive;
     }
 }
+
+
 int locValid(int x, int y)     //边界判断
 {
     if (x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
@@ -53,6 +59,7 @@ int locValid(int x, int y)     //边界判断
     }
     return 1;
 }
+
 
 int getAroundCellNum(int x, int y)   //计算周围存活细胞数量
 {
@@ -81,6 +88,8 @@ int getAroundCellNum(int x, int y)   //计算周围存活细胞数量
     }
     return count;
 }
+
+
 void nextStep(void)     //根据规则计算下一时刻细胞矩阵
 {
     int aroundNum = 0;
@@ -104,6 +113,8 @@ void nextStep(void)     //根据规则计算下一时刻细胞矩阵
         }
     }
 }
+
+
 int getCellAlive(int x, int y)     //获取细胞存活状态
 {
     if (locValid(x, y) == 0)
@@ -113,10 +124,14 @@ int getCellAlive(int x, int y)     //获取细胞存活状态
     SCell* cell = getCell(current_map, x, y);
     return cell->Alive;
 }
+
+
 SCell* getCell(SCell* buf, int x, int y) //从地图中获取某坐标的细胞指针
 { 
 	return buf + y * WIDTH + x; 
 }
+
+
 void print()  //输出细胞矩阵
 {
 	int k;
