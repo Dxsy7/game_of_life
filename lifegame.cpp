@@ -272,17 +272,19 @@ void print()  //è¾“å‡ºç»†èƒžçŸ©é˜µ
 int main()
 {
 	int a;
-	InitMap();
+	ramdomInit();
 	print();
-		nextStep();
-		printf("ï¿½Ç·ï¿½é¿´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½1 or 0ï¿½ï¿½ï¿½ï¿½");
+	while(1)
+	{
+		nextTurn();
+		printf("ÊÇ·ñ²é¿´ÏÂÒ»²½ÑÝ»¯£¨1 or 0£©£º");
 		scanf("%d",&a);
 		switch (a){
 			case 1: print(); break;
 			default:{return 0;break;}
 		}
+	}
 
 }
-
 
   
