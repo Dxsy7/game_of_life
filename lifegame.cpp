@@ -383,7 +383,7 @@ LRESULT CALLBACK WindowProc(HWND   hwnd,
         //描画世界
         DrawGrid(hdcBackBuffer, WORLD_WIDTH, WORLD_HEIGHT);
         DrawCell(g_world, hdcBackBuffer);
-        BitBlt(ps.hdc, 0, 0, cxClient, cyClient, hdcBackBuffer, 0, 0, SRCCOPY);
+        BitBlt(ps.hdc, 0, 0, cxClient, cyClient, hdcBackBuffer, 0, 0, BLACKNESS);
         EndPaint(hwnd, &ps);
         break;
     case WM_SIZE:                                                  //（不要）
@@ -528,10 +528,10 @@ void CleanWorld(HDC hdc)
 //描画所有细胞
 void DrawCell(CWorld* world, HDC hdc)
 {
-    HPEN BluePen = CreatePen(PS_SOLID, 1, RGB(255,250,240));
-    HBRUSH BlueBrush = CreateSolidBrush(RGB(255,250,240));
-    SelectObject(hdc, BluePen);
-    SelectObject(hdc, BlueBrush);
+    HPEN WhitePen = CreatePen(PS_SOLID, 1, RGB(255,250,240));
+    HBRUSH WhiteBrush = CreateSolidBrush(RGB(255,250,240));
+    SelectObject(hdc, WhitePen);
+    SelectObject(hdc, WhiteBrush);
     for (int i = 0; i < world->getWidth(); ++i)
     {
         for (int j = 0; j < world->getHeight(); ++j)
@@ -543,8 +543,8 @@ void DrawCell(CWorld* world, HDC hdc)
         }
     }
 
-    DeleteObject(BluePen);
-    DeleteObject(BlueBrush);
+    DeleteObject(WhitePen);
+    DeleteObject(WhiteBrush);
 }
 
 //描画网格
