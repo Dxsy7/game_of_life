@@ -1,16 +1,21 @@
-#game_of_life
-
+game_of_life
+------------
 The project is done through pair programming.We wrote four main functional modules to implement the functionality of the project.
-#Language
+Language
+--------
 c++
-#Team name
+Team name
+---------
 benbo
-#Contributors
+Contributors
+------------
 Jiayun Du,Mengmeng Du
-#IDE
+IDE
+----
 VC6.0
-#Update log
-##V1.0.0 2020-04-05
+Update log
+-----------
+V1.0.0 2020-04-05<br>
 Added interface design.
 
 
